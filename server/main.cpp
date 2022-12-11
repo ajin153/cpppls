@@ -19,7 +19,8 @@ int main(int argc, char *argv[])
 {
 
     // -----debug-----
-    debug_file.open("/home/ajin/Desktop/ajpj/cpppls/server/out/cpppls.log", std::ios_base::app);
+    debug_file.open("/home/ajin/Desktop/ajpj/cpppls/server/out/cpppls.log",
+                    std::ios_base::app);
     // ---------------
 
     char c;

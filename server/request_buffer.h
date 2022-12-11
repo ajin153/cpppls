@@ -41,7 +41,12 @@ public:
 
     std::tuple<std::string, std::string> try_parse_header() const
     {
-        auto eol_pos = m_raw_req.find("\r\n");
+#ifdef __linux__
+        static const std::string endflag = "\r\n";
+#elif _WIN32
+        static const std::string endflag = "\n";
+#endif
+        auto eol_pos = m_raw_req.find(endflag);
         if (eol_pos != std::string::npos) {
             std::string header_str = m_raw_req.substr(0, eol_pos);
             auto delim_pos = header_str.find(":");
