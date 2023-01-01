@@ -1,7 +1,7 @@
 #ifndef CPPPLS_REQUEST_HANDLER_FACTORY_H
 #define CPPPLS_REQUEST_HANDLER_FACTORY_H
 
-#include "../handler/request.h"
+#include "../request_handler/handler.h"
 
 class RequestHandlerFactory {
 public:

@@ -1,4 +1,4 @@
->>> Received request:
+>>> Received client request:
 {
     "id": 0,
     "jsonrpc": "2.0",
@@ -466,10 +466,10 @@
         },
         "clientInfo": {
             "name": "Code - OSS",
-            "version": "1.73.0"
+            "version": "1.73.1"
         },
         "locale": "en-us",
-        "processId": 5639,
+        "processId": 12753,
         "rootPath": "/home/ajin/Desktop/ajpj/cpppls/test",
         "rootUri": "file:///home/ajin/Desktop/ajpj/cpppls/test",
         "trace": "off",
@@ -482,64 +482,128 @@
     }
 }
 
-<<< Sending response:
+>>> Sending server response:
 {
     "id": 0,
     "jsonrpc": "2.0",
     "result": {
         "capabilities": {
-            "codeActionProvider": false,
-            "codeLensProvider": {
-                "resolveProvider": false
+            "completionItem": {
+                "labelDetailsSupport": "true"
             },
             "completionProvider": {
-                "resolveProvider": false,
-                "triggerCharacters": null
+                "resolveProvider": true,
+                "triggerCharacters": [
+                    ">",
+                    ":",
+                    "$",
+                    "@",
+                    "%",
+                    " ",
+                    "-"
+                ]
             },
-            "definitionProvider": false,
-            "documentFormattingProvider": false,
-            "documentHighlightProvider": false,
-            "documentLinkProvider": {
-                "resolveProvider": false
-            },
-            "documentOnTypeFormattingProvider": {
-                "firstTriggerCharacter": "",
-                "moreTriggerCharacter": ""
-            },
-            "documentRangeFormattingProvider": false,
-            "documentSymbolProvider": false,
-            "executeCommandProvider": {
-                "commands": null
-            },
-            "experimental": null,
+            "definitionProvider": true,
+            "documentFormattingProvider": true,
+            "documentRangeFormattingProvider": true,
+            "documentSymbolProvider": true,
             "hoverProvider": true,
-            "referencesProvider": false,
-            "renameProvider": false,
             "signatureHelpProvider": {
-                "triggerCharacters": ""
+                "triggerCharacters": [
+                    "(",
+                    ","
+                ]
             },
             "textDocumentSync": {
                 "change": 2,
                 "openClose": true,
-                "save": {
-                    "includeText": false
-                },
-                "willSave": false,
-                "willSaveWaitUntil": false
+                "save": true
             },
-            "workspaceSymbolProvider": false
+            "workspace": {
+                "workspaceFolders": {
+                    "changeNotifications": true,
+                    "supported": true
+                }
+            },
+            "workspaceSymbolProvider": true
         }
     }
 }
 
->>> Received request:
+>>> Received client request:
 {
     "jsonrpc": "2.0",
     "method": "initialized",
     "params": {}
 }
 
->>> Received request:
+>>> Sending server request:
+{
+    "id": 1,
+    "jsonrpc": "2.0",
+    "method": "workspace/configuration",
+    "params": {
+        "items": [
+            {
+                "section": "cpppls"
+            }
+        ]
+    }
+}
+
+>>> Received client request:
+{
+    "jsonrpc": "2.0",
+    "method": "textDocument/didOpen",
+    "params": {
+        "textDocument": {
+            "languageId": "perl",
+            "text": "use strict;\nuse warnings;\n\nmy $test = 1;\nmy $test = 1\nmy $test2 = 1;\n\n$test = $test3;\n",
+            "uri": "file:///home/ajin/Desktop/ajpj/cpppls/test/main.pl",
+            "version": 1
+        }
+    }
+}
+
+>>> Received client response:
+{
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": [
+        {
+            "perl_exe": "perl",
+            "perl_incs": [
+                "/home/ajin/Desktop/ajpj/cpppls/test/",
+                "/usr/share/perl5/"
+            ]
+        }
+    ]
+}
+
+--- Now g_perl_exe = "perl", g_perl_incs = ["/home/ajin/Desktop/ajpj/cpppls/test/", "/usr/share/perl5/"]
+
+>>> Received client request:
+{
+    "id": 1,
+    "jsonrpc": "2.0",
+    "method": "textDocument/documentSymbol",
+    "params": {
+        "textDocument": {
+            "uri": "file:///home/ajin/Desktop/ajpj/cpppls/test/main.pl"
+        }
+    }
+}
+
+>>> Received client request:
+{
+    "jsonrpc": "2.0",
+    "method": "$/cancelRequest",
+    "params": {
+        "id": 1
+    }
+}
+
+>>> Received client request:
 {
     "jsonrpc": "2.0",
     "method": "textDocument/didOpen",
@@ -553,32 +617,11 @@
     }
 }
 
->>> Received request:
-{
-    "id": 1,
-    "jsonrpc": "2.0",
-    "method": "textDocument/documentLink",
-    "params": {
-        "textDocument": {
-            "uri": "file:///home/ajin/Desktop/ajpj/cpppls/test/test.pl"
-        }
-    }
-}
-
->>> Received request:
-{
-    "jsonrpc": "2.0",
-    "method": "$/cancelRequest",
-    "params": {
-        "id": 1
-    }
-}
-
->>> Received request:
+>>> Received client request:
 {
     "id": 2,
     "jsonrpc": "2.0",
-    "method": "textDocument/documentLink",
+    "method": "textDocument/documentSymbol",
     "params": {
         "textDocument": {
             "uri": "file:///home/ajin/Desktop/ajpj/cpppls/test/test.pl"
@@ -586,454 +629,23 @@
     }
 }
 
->>> Received request:
+>>> Received client request:
+{
+    "jsonrpc": "2.0",
+    "method": "$/cancelRequest",
+    "params": {
+        "id": 2
+    }
+}
+
+>>> Received client request:
 {
     "id": 3,
     "jsonrpc": "2.0",
-    "method": "textDocument/codeLens",
+    "method": "textDocument/documentSymbol",
     "params": {
         "textDocument": {
-            "uri": "file:///home/ajin/Desktop/ajpj/cpppls/test/test.pl"
-        }
-    }
-}
-
->>> Received request:
-{
-    "jsonrpc": "2.0",
-    "method": "textDocument/didChange",
-    "params": {
-        "contentChanges": [
-            {
-                "range": {
-                    "end": {
-                        "character": 0,
-                        "line": 0
-                    },
-                    "start": {
-                        "character": 0,
-                        "line": 0
-                    }
-                },
-                "rangeLength": 0,
-                "text": "s"
-            }
-        ],
-        "textDocument": {
-            "uri": "file:///home/ajin/Desktop/ajpj/cpppls/test/test.pl",
-            "version": 2
-        }
-    }
-}
-
->>> Received request:
-{
-    "jsonrpc": "2.0",
-    "method": "textDocument/didChange",
-    "params": {
-        "contentChanges": [
-            {
-                "range": {
-                    "end": {
-                        "character": 1,
-                        "line": 0
-                    },
-                    "start": {
-                        "character": 1,
-                        "line": 0
-                    }
-                },
-                "rangeLength": 0,
-                "text": "d"
-            }
-        ],
-        "textDocument": {
-            "uri": "file:///home/ajin/Desktop/ajpj/cpppls/test/test.pl",
-            "version": 3
-        }
-    }
-}
-
->>> Received request:
-{
-    "id": 4,
-    "jsonrpc": "2.0",
-    "method": "textDocument/completion",
-    "params": {
-        "context": {
-            "triggerKind": 1
-        },
-        "position": {
-            "character": 2,
-            "line": 0
-        },
-        "textDocument": {
-            "uri": "file:///home/ajin/Desktop/ajpj/cpppls/test/test.pl"
-        }
-    }
-}
-
->>> Received request:
-{
-    "jsonrpc": "2.0",
-    "method": "textDocument/didChange",
-    "params": {
-        "contentChanges": [
-            {
-                "range": {
-                    "end": {
-                        "character": 2,
-                        "line": 0
-                    },
-                    "start": {
-                        "character": 2,
-                        "line": 0
-                    }
-                },
-                "rangeLength": 0,
-                "text": "f"
-            }
-        ],
-        "textDocument": {
-            "uri": "file:///home/ajin/Desktop/ajpj/cpppls/test/test.pl",
-            "version": 4
-        }
-    }
-}
-
->>> Received request:
-{
-    "jsonrpc": "2.0",
-    "method": "textDocument/didChange",
-    "params": {
-        "contentChanges": [
-            {
-                "range": {
-                    "end": {
-                        "character": 3,
-                        "line": 0
-                    },
-                    "start": {
-                        "character": 3,
-                        "line": 0
-                    }
-                },
-                "rangeLength": 0,
-                "text": "a"
-            }
-        ],
-        "textDocument": {
-            "uri": "file:///home/ajin/Desktop/ajpj/cpppls/test/test.pl",
-            "version": 5
-        }
-    }
-}
-
->>> Received request:
-{
-    "jsonrpc": "2.0",
-    "method": "textDocument/didChange",
-    "params": {
-        "contentChanges": [
-            {
-                "range": {
-                    "end": {
-                        "character": 4,
-                        "line": 0
-                    },
-                    "start": {
-                        "character": 4,
-                        "line": 0
-                    }
-                },
-                "rangeLength": 0,
-                "text": "j"
-            }
-        ],
-        "textDocument": {
-            "uri": "file:///home/ajin/Desktop/ajpj/cpppls/test/test.pl",
-            "version": 6
-        }
-    }
-}
-
->>> Received request:
-{
-    "jsonrpc": "2.0",
-    "method": "textDocument/didChange",
-    "params": {
-        "contentChanges": [
-            {
-                "range": {
-                    "end": {
-                        "character": 5,
-                        "line": 0
-                    },
-                    "start": {
-                        "character": 5,
-                        "line": 0
-                    }
-                },
-                "rangeLength": 0,
-                "text": "s"
-            }
-        ],
-        "textDocument": {
-            "uri": "file:///home/ajin/Desktop/ajpj/cpppls/test/test.pl",
-            "version": 7
-        }
-    }
-}
-
->>> Received request:
-{
-    "jsonrpc": "2.0",
-    "method": "textDocument/didChange",
-    "params": {
-        "contentChanges": [
-            {
-                "range": {
-                    "end": {
-                        "character": 6,
-                        "line": 0
-                    },
-                    "start": {
-                        "character": 6,
-                        "line": 0
-                    }
-                },
-                "rangeLength": 0,
-                "text": "h"
-            }
-        ],
-        "textDocument": {
-            "uri": "file:///home/ajin/Desktop/ajpj/cpppls/test/test.pl",
-            "version": 8
-        }
-    }
-}
-
->>> Received request:
-{
-    "jsonrpc": "2.0",
-    "method": "textDocument/didChange",
-    "params": {
-        "contentChanges": [
-            {
-                "range": {
-                    "end": {
-                        "character": 7,
-                        "line": 0
-                    },
-                    "start": {
-                        "character": 7,
-                        "line": 0
-                    }
-                },
-                "rangeLength": 0,
-                "text": "f"
-            }
-        ],
-        "textDocument": {
-            "uri": "file:///home/ajin/Desktop/ajpj/cpppls/test/test.pl",
-            "version": 9
-        }
-    }
-}
-
->>> Received request:
-{
-    "jsonrpc": "2.0",
-    "method": "textDocument/didChange",
-    "params": {
-        "contentChanges": [
-            {
-                "range": {
-                    "end": {
-                        "character": 8,
-                        "line": 0
-                    },
-                    "start": {
-                        "character": 8,
-                        "line": 0
-                    }
-                },
-                "rangeLength": 0,
-                "text": "g"
-            }
-        ],
-        "textDocument": {
-            "uri": "file:///home/ajin/Desktop/ajpj/cpppls/test/test.pl",
-            "version": 10
-        }
-    }
-}
-
->>> Received request:
-{
-    "jsonrpc": "2.0",
-    "method": "textDocument/didChange",
-    "params": {
-        "contentChanges": [
-            {
-                "range": {
-                    "end": {
-                        "character": 9,
-                        "line": 0
-                    },
-                    "start": {
-                        "character": 9,
-                        "line": 0
-                    }
-                },
-                "rangeLength": 0,
-                "text": "j"
-            }
-        ],
-        "textDocument": {
-            "uri": "file:///home/ajin/Desktop/ajpj/cpppls/test/test.pl",
-            "version": 11
-        }
-    }
-}
-
->>> Received request:
-{
-    "id": 5,
-    "jsonrpc": "2.0",
-    "method": "textDocument/documentLink",
-    "params": {
-        "textDocument": {
-            "uri": "file:///home/ajin/Desktop/ajpj/cpppls/test/test.pl"
-        }
-    }
-}
-
->>> Received request:
-{
-    "jsonrpc": "2.0",
-    "method": "textDocument/didSave",
-    "params": {
-        "textDocument": {
-            "uri": "file:///home/ajin/Desktop/ajpj/cpppls/test/test.pl"
-        }
-    }
-}
-
->>> Received request:
-{
-    "jsonrpc": "2.0",
-    "method": "$/cancelRequest",
-    "params": {
-        "id": 3
-    }
-}
-
->>> Received request:
-{
-    "id": 6,
-    "jsonrpc": "2.0",
-    "method": "textDocument/codeLens",
-    "params": {
-        "textDocument": {
-            "uri": "file:///home/ajin/Desktop/ajpj/cpppls/test/test.pl"
-        }
-    }
-}
-
->>> Received request:
-{
-    "jsonrpc": "2.0",
-    "method": "$/cancelRequest",
-    "params": {
-        "id": 4
-    }
-}
-
->>> Received request:
-{
-    "jsonrpc": "2.0",
-    "method": "$/cancelRequest",
-    "params": {
-        "id": 6
-    }
-}
-
->>> Received request:
-{
-    "id": 7,
-    "jsonrpc": "2.0",
-    "method": "textDocument/codeLens",
-    "params": {
-        "textDocument": {
-            "uri": "file:///home/ajin/Desktop/ajpj/cpppls/test/test.pl"
-        }
-    }
-}
-
->>> Received request:
-{
-    "jsonrpc": "2.0",
-    "method": "$/cancelRequest",
-    "params": {
-        "id": 7
-    }
-}
-
->>> Received request:
-{
-    "id": 8,
-    "jsonrpc": "2.0",
-    "method": "textDocument/codeLens",
-    "params": {
-        "textDocument": {
-            "uri": "file:///home/ajin/Desktop/ajpj/cpppls/test/test.pl"
-        }
-    }
-}
-
->>> Received request:
-{
-    "id": 9,
-    "jsonrpc": "2.0",
-    "method": "textDocument/hover",
-    "params": {
-        "position": {
-            "character": 9,
-            "line": 0
-        },
-        "textDocument": {
-            "uri": "file:///home/ajin/Desktop/ajpj/cpppls/test/test.pl"
-        }
-    }
-}
-
->>> Received request:
-{
-    "jsonrpc": "2.0",
-    "method": "$/cancelRequest",
-    "params": {
-        "id": 9
-    }
-}
-
->>> Received request:
-{
-    "jsonrpc": "2.0",
-    "method": "$/cancelRequest",
-    "params": {
-        "id": 8
-    }
-}
-
->>> Received request:
-{
-    "id": 10,
-    "jsonrpc": "2.0",
-    "method": "textDocument/codeLens",
-    "params": {
-        "textDocument": {
-            "uri": "file:///home/ajin/Desktop/ajpj/cpppls/test/test.pl"
+            "uri": "file:///home/ajin/Desktop/ajpj/cpppls/test/main.pl"
         }
     }
 }

@@ -1,7 +1,7 @@
 {
   "name": "cpppls",
   "displayName": "cpppls",
-  "description": "Perl Language Server Written By Cpp",
+  "description": "Perl Language Server Written By Cpp (cpppls)",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.73.0"
@@ -13,7 +13,23 @@
     "onLanguage:perl"
   ],
   "main": "./out/extension.js",
-  "contributes": {},
+  "contributes": {
+    "configuration": {
+        "title": "Perl Language Server Written By Cpp (cpppls)",
+        "properties": {
+            "cpppls.perl_exe": {
+                "type": "string",
+                "description": "Path to the perl binary to use for syntax checking",
+                "default":" perl"
+            },
+            "cpppls.perl_incs": {
+                "type": "array",
+                "description": "Paths to add to @INC",
+                "default": []
+            }
+        }
+    }
+  },
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",

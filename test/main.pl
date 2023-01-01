@@ -1,6 +1,8 @@
-use AJin::Server::Request::TextDocument::PublishDiagnostics
+use strict;
+use warnings;
 
-# client("didOpen")
-#  -> server("PublishDiagnostics")
-#
+my $test = 1;
+my $test = 1
+my $test2 = 1;
 
+$test = $test3;

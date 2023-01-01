@@ -1,24 +1,31 @@
-#ifndef CPPPLS_REQUEST_HANDLER_H
-#define CPPPLS_REQUEST_HANDLER_H
+#ifndef CPPPLS_HANDLER_H
+#define CPPPLS_HANDLER_H
+
+// -----debug-----
+#include <fstream>
+extern std::ofstream debug_file;
+// ---------------
 
 #include <string>
 #include <optional>
 #include <iostream>
 
+// third-party
+#define FMT_HEADER_ONLY
+#include "../fmt/format.h"
+#include "../fmt/ostream.h"
 #include "../nlohmann/json.hpp"
 
+// @brief: 处理client request和server request的通用基类
 class RequestHandler {
 public:
-    RequestHandler() {}
+    RequestHandler() = default;
 
     virtual ~RequestHandler() = default;
 
-    virtual std::optional<std::string> handle(const nlohmann::json &req_content)
-    {
-        return std::nullopt;
-    }
+    virtual void handle(const nlohmann::json&) {}
 
-    std::string make_response(const nlohmann::json &resp_content)
+    std::string make_response(const nlohmann::json& resp_content)
     {
         std::string resp_header;
         // dump()必须使用-1(默认值)，不然lsp-client无法识别response
@@ -33,15 +40,11 @@ public:
         return resp_header + resp_content.dump();
     }
 
-// -----debug-----
-public:
-    nlohmann::json m_resp_content;
-    nlohmann::json get_resp_content()
+    void send_response(const std::string& response)
     {
-        return m_resp_content;
+        fmt::print("{}", response);
+        std::cout << std::flush;
     }
-// ---------------
-
 };
 
 #endif

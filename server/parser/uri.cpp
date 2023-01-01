@@ -1,8 +1,7 @@
 #include "uri.h"
 #include <cctype>
+#include <cstddef>
 #include <stdexcept>
-
-#include <iostream>
 
 URI::URI(const std::string &raw_str): m_raw_str(raw_str)
 {
@@ -82,6 +81,15 @@ void URI::parse_authority()
                                  " it seems raw_str is unstandard"
                                  " (authority has wrong beginning!)");
     }
+#ifdef _WIN32
+    /*
+     * windows的uri实例:
+     *     file:///d%3A/Users/User/Desktop/sf_project/z_tmp/cpppls/test/test.pl
+     * /d:/xxxx 这种 path 无法识别，需要手动将最前面的 '/' 跳过，即解析：
+     * d:/xxx 这种 path
+     */
+    m_cur += 1;
+#endif
 }
 
 void URI::parse_path()
@@ -92,13 +100,56 @@ void URI::parse_path()
         str_cur += 1;
     }
     m_path = std::string(m_cur, str_cur);
+    decode_uri_path();
 }
 
+// 20221212: 解码path中类似 ":" 这类使用16进制表示的字符
+void URI::decode_uri_path()
+{
+    std::string res = "";
+    std::size_t len = m_path.length();
+    for (std::size_t i = 0; i < len; ++i) {
+        if (m_path[i] == '%') {
+            if (i + 2 >= len) {
+                throw std::runtime_error("[error]: decode_uri_path() failed,"
+                                         " it seems path contains unstandard"
+                                         " percent encodings!");
+            }
+            unsigned char high = from_hex(m_path[++i]);
+            unsigned char low = from_hex(m_path[++i]);
+            res += high * 16 + low;
+        } else {
+            res += m_path[i];
+        }
+    }
+    m_path = res;
+}
+
+// 20221212: 解码path中类似 ":" 这类使用16进制表示的字符
+unsigned char URI::from_hex(const unsigned char &x)
+{
+    unsigned char res;
+    if (x >= 'A' && x <= 'Z') {
+        res = x - 'A' + 10;
+    } else if (x >= 'a' && x <= 'z') {
+        res = x - 'a' + 10;
+    } else if (x >= '0' && x <= '9') {
+        res = x - '0';
+    } else {
+        throw std::runtime_error("[error]: from_hex() failed,"
+                                 " it seems you passed the character which"
+                                 " is not in [a-z], [A-Z] or [0-9]!");
+    }
+    return res;
+}
+
+// 获取解析好的uri:scheme
 std::string URI::get_scheme()
 {
     return m_scheme;
 }
 
+// 获取解析好的uri:path
 std::string URI::get_path()
 {
     return m_path;

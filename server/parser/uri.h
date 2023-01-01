@@ -25,6 +25,10 @@ private:
     void parse_authority();
     void parse_path();
 
+    // 20221212: 解码path中类似 ":" 这类使用16进制表示的字符
+    void decode_uri_path();
+    unsigned char from_hex(const unsigned char&);
+
     // 20221211: 不关注query和fragment
     // void parse_query();
     // void parse_fragment();

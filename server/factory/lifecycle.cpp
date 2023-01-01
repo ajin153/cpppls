@@ -1,6 +1,6 @@
 #include "lifecycle.h"
-#include "../handler/initialize.h"
-#include "../handler/initialized.h"
+#include "../request_handler/client/initialize.h"
+#include "../request_handler/client/initialized.h"
 
 LifeCycleFactory::LifeCycleFactory(std::string method)
 {
