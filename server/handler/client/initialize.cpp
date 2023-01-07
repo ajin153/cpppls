@@ -1,6 +1,7 @@
 #include "initialize.h"
 
-void InitializeHandler::handle(const nlohmann::json &req_content)
+void
+InitializeHandler::handle(const nlohmann::json &req_content)
 {
     // 1.set initialize base config
     nlohmann::json completion_item{
@@ -52,10 +53,10 @@ void InitializeHandler::handle(const nlohmann::json &req_content)
     };
 
     // 2.make initialize response
-    std::string response = make_response(resp_content);
+    std::string response = make_message(resp_content);
 
     // 3.send initialize response
-    send_response(response);
+    send_message(response);
 
     // -----debug-----
     fmt::print(debug_file, ">>> Sending server response:\n{}\n\n",

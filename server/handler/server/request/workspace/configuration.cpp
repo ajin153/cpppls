@@ -15,7 +15,8 @@
     ]
 }
 */
-void Configuration::handle(const nlohmann::json& resp_content)
+void
+ConfigurationHandler::handle(const nlohmann::json& resp_content)
 {
     // 设置g_perl_exe和g_perl_incs
     std::vector<nlohmann::json> results;

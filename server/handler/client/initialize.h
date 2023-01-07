@@ -3,8 +3,9 @@
 
 #include "../handler.h"
 
-// method : Initialize
-class InitializeHandler : public RequestHandler {
+// [client request]
+// method: Initialize
+class InitializeHandler : public Handler {
 public:
     InitializeHandler() = default;
     ~InitializeHandler() = default;

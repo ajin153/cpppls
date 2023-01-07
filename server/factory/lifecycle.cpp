@@ -1,8 +1,8 @@
 #include "lifecycle.h"
-#include "../request_handler/client/initialize.h"
-#include "../request_handler/client/initialized.h"
+#include "../handler/client/initialize.h"
+#include "../handler/client/initialized.h"
 
-LifeCycleFactory::LifeCycleFactory(std::string method)
+LifeCycleFactory::LifeCycleFactory(const std::string& method)
 {
     if (method == "initialize") {
         req_type = LifeCycleType::INITIALIZE;
@@ -13,9 +13,10 @@ LifeCycleFactory::LifeCycleFactory(std::string method)
     }
 }
 
-RequestHandler* LifeCycleFactory::create_handler()
+Handler*
+LifeCycleFactory::create_handler()
 {
-    RequestHandler *req_handler;
+    Handler *req_handler;
     switch(req_type){
     case LifeCycleType::INITIALIZE:
         req_handler = new InitializeHandler();
@@ -25,7 +26,7 @@ RequestHandler* LifeCycleFactory::create_handler()
         break;
     case LifeCycleType::OTHER:
     default:
-        req_handler = new RequestHandler();
+        req_handler = new Handler();
         break;
     }
     return req_handler;

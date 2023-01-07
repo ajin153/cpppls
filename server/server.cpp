@@ -1,4 +1,3 @@
-#include "request_handler/handler.h"
 #include <fstream>
 #include <iostream>
 #include <vector>
@@ -11,8 +10,9 @@
 
 #include "server.h"
 #include "message_buffer.h"
-#include "factory/request_handler.h"
+#include "factory/handler.h"
 #include "factory/lifecycle.h"
+#include "factory/textdocument.h"
 
 // -----debug-----
 std::ofstream debug_file;
@@ -22,13 +22,13 @@ std::ofstream debug_file;
 int g_server_request_id = 0;
 
 // @brief: perl二进制文件的位置，用于perl -c
-std::string g_perl_exe;
+std::string g_perl_exe = "perl";
 
 // @brief: perl的@INC，用于perl -c
 std::vector<std::string> g_perl_incs;
 
 // @brief: 保存server向client发送的请求handler，用于处理client的response
-std::unordered_map<int, RequestHandler*> g_server_requests;
+std::unordered_map<int, Handler*> g_server_requests;
 
 /*
  * @brief: cpppls启动入口
@@ -67,17 +67,19 @@ Server::run()
                 auto delim_pos = method.find("/");
                 if (delim_pos != std::string::npos) {
                     method_prefix = method.substr(0, delim_pos);
-                    method = method.substr(delim_pos);
+                    method = method.substr(delim_pos+1);
                 }
-                RequestHandlerFactory *factory;
+                HandlerFactory *factory;
                 if (method == "initialize" ||
                     method == "initialized") {
                     factory = new LifeCycleFactory(method);
+                } else if (method_prefix == "textDocument") {
+                    factory = new TextDocumentFactory(method);
                 } else {
-                    factory = new RequestHandlerFactory();
+                    factory = new HandlerFactory();
                 }
-                RequestHandler *handler = factory->create_handler();
-                handle_client_request(handler, msg_content);
+                Handler *handler = factory->create_handler();
+                handle_message(handler, msg_content);
                 delete handler;
                 delete factory;
             } else {
@@ -91,8 +93,8 @@ Server::run()
                 if (msg_content.contains("id")) {
                     int id = msg_content["id"];
                     if (g_server_requests.count(msg_content["id"])) {
-                        RequestHandler *handler = g_server_requests[id];
-                        handle_client_response(handler, msg_content);
+                        Handler *handler = g_server_requests[id];
+                        handle_message(handler, msg_content);
                         delete handler;
                         g_server_requests.erase(id);
                     }
@@ -110,21 +112,10 @@ Server::run()
 }
 
 /*
- * @brief: 处理client的request
+ * @brief: 处理client的request和response
  */
 void
-Server::handle_client_request(RequestHandler* handler,
-                      const nlohmann::json& req_content)
+Server::handle_message(Handler* handler, const nlohmann::json& msg_content)
 {
-    handler->handle(req_content);
-}
-
-/*
- * @brief: 处理client的response (对应server request的返回值)
- */
-void
-Server::handle_client_response(RequestHandler* handler,
-                      const nlohmann::json& resp_content)
-{
-    handler->handle(resp_content);
+    handler->handle(msg_content);
 }

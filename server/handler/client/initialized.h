@@ -6,12 +6,13 @@
 #include "../handler.h"
 
 extern int g_server_request_id;
-extern std::unordered_map<int, RequestHandler*> g_server_requests;
+extern std::unordered_map<int, Handler*> g_server_requests;
 
-// method : Initialized
-class InitializedHandler: public RequestHandler {
+// [client request]
+// method: Initialized
+class InitializedHandler: public Handler {
 public:
-    InitializedHandler() {}
+    InitializedHandler() = default;
     ~InitializedHandler() = default;
     void handle(const nlohmann::json&) override;
 };

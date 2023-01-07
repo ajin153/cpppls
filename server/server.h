@@ -4,16 +4,14 @@
 #include <optional>
 #include <string>
 
-#include "request_handler/handler.h"
+#include "handler/handler.h"
 
 class Server {
 public:
     void run();
 
 private:
-    void handle_client_request(RequestHandler*, const nlohmann::json&);
-
-    void handle_client_response(RequestHandler*, const nlohmann::json&);
+    void handle_message(Handler*, const nlohmann::json&);
 };
 
 #endif
