@@ -3,12 +3,12 @@
 
 #include <unordered_map>
 
-#include "../handler.h"
+#include "../../handler.h"
 
 extern int g_server_request_id;
 extern std::unordered_map<int, Handler*> g_server_requests;
 
-// [client request]
+// [client notification]
 // method: Initialized
 class InitializedHandler: public Handler {
 public:

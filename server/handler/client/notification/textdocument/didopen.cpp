@@ -1,5 +1,5 @@
 #include "didopen.h"
-#include "../../server/notification/textdocument/publishdiagnostics.h"
+#include "../../../server/notification/textdocument/publishdiagnostics.h"
 
 void
 DidOpenHandler::handle(const nlohmann::json& req_content)

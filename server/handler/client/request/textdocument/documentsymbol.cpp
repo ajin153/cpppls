@@ -1,7 +1,7 @@
 #include <future>
 
 #include "documentsymbol.h"
-#include "../../../parser/uri.h"
+#include "../../../../parser/uri.h"
 
 // third-party
 #include <boost/process.hpp>

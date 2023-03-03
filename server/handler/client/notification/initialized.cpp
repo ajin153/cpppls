@@ -1,5 +1,5 @@
 #include "initialized.h"
-#include "../server/request/workspace/configuration.h"
+#include "../../server/request/workspace/configuration.h"
 
 /*
  * client: initialized

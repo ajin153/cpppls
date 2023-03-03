@@ -1,7 +1,7 @@
 #ifndef CPPPLS_TEXTDOCUMENT_DOCUMENTSYMBOLS_H
 #define CPPPLS_TEXTDOCUMENT_DOCUMENTSYMBOLS_H
 
-#include "../../handler.h"
+#include "../../../handler.h"
 
 extern std::string g_perl_exe;
 

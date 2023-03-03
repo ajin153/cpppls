@@ -32,10 +32,11 @@ set(SOURCES
     factory/lifecycle.cpp
     factory/textdocument.cpp
     parser/uri.cpp
-    handler/client/initialize.cpp
-    handler/client/initialized.cpp
-    handler/client/textdocument/didopen.cpp
-    handler/client/textdocument/documentsymbol.cpp
+    handler/client/request/initialize.cpp
+    handler/client/notification/initialized.cpp
+    handler/client/notification/textdocument/didopen.cpp
+    handler/client/notification/textdocument/didsave.cpp
+    handler/client/request/textdocument/documentsymbol.cpp
     handler/server/request/workspace/configuration.cpp
     handler/server/notification/textdocument/publishdiagnostics.cpp
     ./main.cpp
@@ -53,8 +54,11 @@ target_include_directories(${PROJECT_NAME}
         ${PROJECT_SOURCE_DIR}/nlohmann
         ${PROJECT_SOURCE_DIR}/parser
         ${PROJECT_SOURCE_DIR}/handler
-        ${PROJECT_SOURCE_DIR}/handler/client
-        ${PROJECT_SOURCE_DIR}/handler/client/textdocument
+        ${PROJECT_SOURCE_DIR}/handler
+        ${PROJECT_SOURCE_DIR}/handler/client/request/
+        ${PROJECT_SOURCE_DIR}/handler/client/notification/
+        ${PROJECT_SOURCE_DIR}/handler/client/request/textdocument
+        ${PROJECT_SOURCE_DIR}/handler/client/notification/textdocument
         ${PROJECT_SOURCE_DIR}/handler/server/notification/textdocument
         ${PROJECT_SOURCE_DIR}/handler/server/request/workspace
 )

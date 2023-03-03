@@ -8,6 +8,7 @@ class TextDocumentFactory: public HandlerFactory {
 public:
     enum class TextDocumentType : int {
         DIDOPEN = 0,
+        DIDSAVE,
         DOCUMENTSYMBOL,
         OTHER
     };

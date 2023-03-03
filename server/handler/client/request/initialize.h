@@ -1,10 +1,12 @@
 #ifndef CPPPLS_INITIALIZE_HANDLER_H
 #define CPPPLS_INITIALIZE_HANDLER_H
 
-#include "../handler.h"
+#include "../../handler.h"
 
-// [client request]
-// method: Initialize
+/*
+ * [client request]
+ * method: Initialize
+ */
 class InitializeHandler : public Handler {
 public:
     InitializeHandler() = default;

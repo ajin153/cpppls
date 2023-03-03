@@ -1,6 +1,6 @@
 #include "lifecycle.h"
-#include "../handler/client/initialize.h"
-#include "../handler/client/initialized.h"
+#include "../handler/client/request/initialize.h"
+#include "../handler/client/notification/initialized.h"
 
 LifeCycleFactory::LifeCycleFactory(const std::string& method)
 {
