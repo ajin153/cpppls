@@ -135,6 +135,7 @@ PublishDiagnosticsHandler::handle(const nlohmann::json& req_content)
     // -----debug-----
     fmt::print(debug_file, ">>> Sending server notification:\n{}\n\n",
                publish_diagnostics_content.dump(4));
+    debug_file.flush();
     // ---------------
 
 }

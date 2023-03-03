@@ -1,7 +1,7 @@
 # 0.Set minimum required cmake_version
 cmake_minimum_required(VERSION 3.5)
 
-# 1.Set project nameï¼Œproject_version and project_programming_language
+# 1.Set project name£¬project_version and project_programming_language
 project(cpppls VERSION 0.1 LANGUAGES CXX)
 
 # 2.Set std=c++11 required
@@ -35,6 +35,7 @@ set(SOURCES
     handler/client/initialize.cpp
     handler/client/initialized.cpp
     handler/client/textdocument/didopen.cpp
+    handler/client/textdocument/documentsymbol.cpp
     handler/server/request/workspace/configuration.cpp
     handler/server/notification/textdocument/publishdiagnostics.cpp
     ./main.cpp

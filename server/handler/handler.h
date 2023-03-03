@@ -7,7 +7,6 @@ extern std::ofstream debug_file;
 // ---------------
 
 #include <string>
-#include <optional>
 #include <iostream>
 
 // third-party
