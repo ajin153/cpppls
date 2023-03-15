@@ -35,7 +35,7 @@ InitializeHandler::handle(const nlohmann::json &req_content)
             {   { "completionItem", completion_item },
                 { "definitionProvider", true },
                 { "documentSymbolProvider", true },
-                { "hoverProvider", true },
+                { "hoverProvider", false },
                 { "signatureHelpProvider", signature_help_provider },
                 { "textDocumentSync", textdocument_sync },
                 { "documentFormattingProvider", true },

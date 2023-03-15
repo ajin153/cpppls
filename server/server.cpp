@@ -21,12 +21,6 @@ std::ofstream debug_file;
 // @brief: server向client发送请求时使用的id (递增)
 int g_server_request_id = 0;
 
-// @brief: perl二进制文件的位置，用于perl -c
-std::string g_perl_exe = "perl";
-
-// @brief: perl的@INC，用于perl -c
-std::vector<std::string> g_perl_incs;
-
 // @brief: 保存server向client发送的请求handler，用于处理client的response
 std::unordered_map<int, Handler*> g_server_requests;
 

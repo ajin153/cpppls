@@ -26,6 +26,16 @@
                 "type": "array",
                 "description": "Paths to add to @INC",
                 "default": []
+            },
+            "cpppls.symbol_scanner.enabled": {
+                "type": "boolean",
+                "description": "Enable symbol scanner",
+                "default": false
+            },
+            "cpppls.symbol_scanner.path": {
+                "type": "string",
+                "description": "Path to the symbol scanner",
+                "default": ""
             }
         }
     }

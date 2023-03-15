@@ -3,6 +3,8 @@
 #include <cstddef>
 #include <stdexcept>
 
+URI::URI() {}
+
 URI::URI(const std::string &raw_str): m_raw_str(raw_str)
 {
     m_cur = m_raw_str.cbegin();
@@ -153,4 +155,18 @@ std::string URI::get_scheme()
 std::string URI::get_path()
 {
     return m_path;
+}
+
+// @brief: 生成lsp协议中需要的文件uri
+std::string
+URI::encode_uri_path(std::string& raw_path)
+{
+#ifdef _WIN32
+    // 这实现太low了，想办法优化 ---2023.3.9
+    std::string res = "file:///" + raw_path.substr(0, 1) + "%3A" +
+        raw_path.substr(2);
+    return res;
+#elif __linux__
+    return "file://" + raw_path;
+#endif
 }

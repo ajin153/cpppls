@@ -10,7 +10,8 @@ void clear_current_symbol();
 
 typedef enum {
     PACKAGE = 256,
-    FUNCTION
+    FUNCTION,
+    COMMENT
 } TokenType;
 
 struct symbol {
@@ -26,8 +27,16 @@ struct symbol *current_symbol;
 /* Definitions */
 %s PKG
 %s FUNC
+%x COMMENT
 
 %%
+
+#.*\n { /* ignore comment */}
+
+"=pod" { BEGIN COMMENT; }
+<COMMENT>"=cut" { BEGIN INITIAL; }
+<COMMENT>.* { /* ignore comment */ }
+<COMMENT>\n { /* ignore comment */ }
 
 "package"\x20+ {
     BEGIN PKG;

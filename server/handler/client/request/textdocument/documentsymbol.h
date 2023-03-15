@@ -3,8 +3,6 @@
 
 #include "../../../handler.h"
 
-extern std::string g_perl_exe;
-
 /*
  * [client request]
  * method: textDocument/documentSymbol

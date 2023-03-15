@@ -5,6 +5,7 @@
 
 #include "publishdiagnostics.h"
 #include "../../../../parser/uri.h"
+#include "../../../../tools/tools.h"
 
 // third-party
 #include <boost/process.hpp>
@@ -31,17 +32,16 @@ PublishDiagnosticsHandler::handle(const nlohmann::json& req_content)
     URI uri = URI(req_content["params"]["textDocument"]["uri"]);
     std::string perl_file_path = uri.get_path();
 
-    // 2. count file each line length
-    std::ifstream fs(perl_file_path);
-    std::string fs_li;
-    std::vector<int> line_lengths;
-    while (std::getline(fs, fs_li)) {
-        line_lengths.push_back(fs_li.length());
-    }
+    // 2.get the file lines
+    if (!Tools::is_file_content_exist(perl_file_path)) return;
+    const std::vector<FileLine> &file_lines = Tools::get_file_content(perl_file_path);
 
     // 3. make "perl -I xxx -c yyy" cmd
-    std::string perl_syntax_cmd = g_perl_exe;
-    for (auto &perl_inc : g_perl_incs) {
+    std::string perl_exe = Tools::get_perl_exe();
+    if (perl_exe == "") return;
+    const std::vector<std::string> &perl_incs = Tools::get_perl_incs();
+    std::string perl_syntax_cmd = perl_exe;
+    for (auto &perl_inc : perl_incs) {
         perl_syntax_cmd += (" -I " + perl_inc);
     }
     perl_syntax_cmd += (" -c " + perl_file_path);
@@ -95,13 +95,14 @@ PublishDiagnosticsHandler::handle(const nlohmann::json& req_content)
                会比想要的位置向后推移一行，
                怀疑是跟vscode-client侧使用数据存储数据默认起始为0有关。
             */
+            const FileLine &error_line = file_lines[line - 1];
             nlohmann::json start{
                 { "line", line - 1 },
                 { "character", 0 }
             };
             nlohmann::json end{
                 { "line", line - 1 },
-                { "character", line_lengths[line - 1] }
+                { "character", error_line.m_length }
             };
             nlohmann::json range{
                 { "start", start },
@@ -116,6 +117,7 @@ PublishDiagnosticsHandler::handle(const nlohmann::json& req_content)
             diagnostics_vec.push_back(diagnostic);
         }
     }
+    if (diagnostics_vec.empty()) return;
     nlohmann::json diagnostics(diagnostics_vec);
     nlohmann::json params{
         { "uri", req_content["params"]["textDocument"]["uri"] },

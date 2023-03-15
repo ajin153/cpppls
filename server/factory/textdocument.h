@@ -10,6 +10,7 @@ public:
         DIDOPEN = 0,
         DIDSAVE,
         DOCUMENTSYMBOL,
+        DEFINITION,
         OTHER
     };
 

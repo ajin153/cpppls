@@ -2,5 +2,5 @@
 /server/out/*
 /server/tmp/
 /server/build
-/server/tools/perl_scanner/perl_scanner
-/server/tools/perl_scanner/lex.yy.c
+/server/tools/symbol_scanner/symbol_scanner
+/server/tools/symbol_scanner/lex.yy.c

@@ -4,8 +4,8 @@ cmake_minimum_required(VERSION 3.5)
 # 1.Set project name£¬project_version and project_programming_language
 project(cpppls VERSION 0.1 LANGUAGES CXX)
 
-# 2.Set std=c++11 required
-set(CMAKE_CXX_STANDARD 11)
+# 2.Set std=c++17 required
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDART_REQUIRED ON)
 
 # 3.Boost config (Windows)
@@ -32,11 +32,13 @@ set(SOURCES
     factory/lifecycle.cpp
     factory/textdocument.cpp
     parser/uri.cpp
+    tools/tools.cpp
     handler/client/request/initialize.cpp
     handler/client/notification/initialized.cpp
     handler/client/notification/textdocument/didopen.cpp
     handler/client/notification/textdocument/didsave.cpp
     handler/client/request/textdocument/documentsymbol.cpp
+    handler/client/request/textdocument/definition.cpp
     handler/server/request/workspace/configuration.cpp
     handler/server/notification/textdocument/publishdiagnostics.cpp
     ./main.cpp
@@ -53,6 +55,7 @@ target_include_directories(${PROJECT_NAME}
         ${PROJECT_SOURCE_DIR}/fmt
         ${PROJECT_SOURCE_DIR}/nlohmann
         ${PROJECT_SOURCE_DIR}/parser
+        ${PROJECT_SOURCE_DIR}/tools
         ${PROJECT_SOURCE_DIR}/handler
         ${PROJECT_SOURCE_DIR}/handler
         ${PROJECT_SOURCE_DIR}/handler/client/request/

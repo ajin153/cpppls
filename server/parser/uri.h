@@ -5,11 +5,13 @@
 
 class URI {
 public:
+    URI();
     URI(const std::string&);
     ~URI() = default;
 
     std::string get_scheme();
     std::string get_path();
+    static std::string encode_uri_path(std::string&);
 
 private:
     const std::string m_raw_str;

@@ -2,9 +2,7 @@
 #define CPPPLS_TEXTDOCUMENT_PUBLISHDIAGNOSTICS_HANDLER_H
 
 #include "../../../handler.h"
-
-extern std::string g_perl_exe;
-extern std::vector<std::string> g_perl_incs;
+#include <unordered_map>
 
 /*
  * [server notification]

@@ -2,9 +2,7 @@
 #define CPPPLS_WORKSPACE_CONFIGURATION_H
 
 #include "../../../handler.h"
-
-extern std::string g_perl_exe;
-extern std::vector<std::string> g_perl_incs;
+#include <unordered_map>
 
 /*
  * [server request]
@@ -15,6 +13,7 @@ public:
     ConfigurationHandler() = default;
     ~ConfigurationHandler() = default;
     void handle(const nlohmann::json&) override;
+    void initialize_file_index(std::vector<std::string>);
 };
 
 #endif

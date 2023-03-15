@@ -2,6 +2,7 @@
 #include "../handler/client/notification/textdocument/didopen.h"
 #include "../handler/client/notification/textdocument/didsave.h"
 #include "../handler/client/request/textdocument/documentsymbol.h"
+#include "../handler/client/request/textdocument/definition.h"
 
 TextDocumentFactory::TextDocumentFactory(const std::string& method)
 {
@@ -11,6 +12,8 @@ TextDocumentFactory::TextDocumentFactory(const std::string& method)
         req_type = TextDocumentType::DIDSAVE;
     } else if (method == "documentSymbol") {
         req_type = TextDocumentType::DOCUMENTSYMBOL;
+    } else if (method == "definition") {
+        req_type = TextDocumentType::DEFINITION;
     } else {
         req_type = TextDocumentType::OTHER;
     }
@@ -29,6 +32,9 @@ TextDocumentFactory::create_handler()
         break;
     case TextDocumentType::DOCUMENTSYMBOL:
         req_handler = new DocumentSymbolHandler();
+        break;
+    case TextDocumentType::DEFINITION:
+        req_handler = new DefinitionHandler();
         break;
     default:
         req_handler = new Handler();
