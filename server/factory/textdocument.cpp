@@ -1,4 +1,4 @@
-#include "textdocument.h"
+﻿#include "textdocument.h"
 #include "../handler/client/notification/textdocument/didopen.h"
 #include "../handler/client/notification/textdocument/didsave.h"
 #include "../handler/client/request/textdocument/documentsymbol.h"

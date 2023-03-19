@@ -28,12 +28,15 @@ void InitializedHandler::handle(const nlohmann::json &req_content)
         make_message(get_configuration_req_content);
     send_message(get_configuration_request);
 
+    // 2.保存请求handler
+    Handler *configuration_handler = new ConfigurationHandler();
+    g_server_requests[g_server_request_id] = configuration_handler;
+
+#ifndef NDEBUG
     // -----debug-----
     fmt::print(debug_file, ">>> Sending server request:\n{}\n\n",
                get_configuration_req_content.dump(4));
     // ---------------
+#endif
 
-    // 2.保存请求handler
-    Handler *configuration_handler = new ConfigurationHandler();
-    g_server_requests[g_server_request_id] = configuration_handler;
 }

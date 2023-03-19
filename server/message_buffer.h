@@ -80,13 +80,6 @@ public:
         m_msg_content.clear();
     }
 
-    // -----debug-----
-    std::string get_m_raw_msg()
-    {
-        return m_raw_msg;
-    }
-    // ---------------
-
 private:
     std::string m_raw_msg;
     std::unordered_map<std::string, std::string> m_msg_headers;

@@ -1,10 +1,12 @@
 #ifndef CPPPLS_HANDLER_H
 #define CPPPLS_HANDLER_H
 
+#ifndef NDEBUG
 // -----debug-----
 #include <fstream>
 extern std::ofstream debug_file;
 // ---------------
+#endif
 
 #include <string>
 #include <iostream>

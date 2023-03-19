@@ -12,6 +12,7 @@ set(CMAKE_CXX_STANDART_REQUIRED ON)
 if (WIN32)
     set(BOOST_ROOT C:/Boost)
     set(Boost_LIBRARY_DIRS C:/Boost/lib)
+    set(Boost_USE_STATIC_LIBS OFF)
 endif (WIN32)
 
 # 3.1 Boost config (Linux)

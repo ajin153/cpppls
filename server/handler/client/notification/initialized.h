@@ -1,4 +1,4 @@
-#ifndef CPPPLS_INITIALIZED_HANDLER_H
+﻿#ifndef CPPPLS_INITIALIZED_HANDLER_H
 #define CPPPLS_INITIALIZED_HANDLER_H
 
 #include <unordered_map>

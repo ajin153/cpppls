@@ -1,4 +1,4 @@
-#include "lifecycle.h"
+﻿#include "lifecycle.h"
 #include "../handler/client/request/initialize.h"
 #include "../handler/client/notification/initialized.h"
 
