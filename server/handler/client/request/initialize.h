@@ -1,4 +1,4 @@
-#ifndef CPPPLS_INITIALIZE_HANDLER_H
+﻿#ifndef CPPPLS_INITIALIZE_HANDLER_H
 #define CPPPLS_INITIALIZE_HANDLER_H
 
 #include "../../handler.h"

@@ -9,7 +9,7 @@ typedef std::string FunctionName;
 
 struct FunctionIndex {
     int m_lineno;    // index start lineno
-    int m_length; // index length
+    size_t m_length; // index length
 };
 
 struct PackageIndex {
@@ -19,14 +19,14 @@ struct PackageIndex {
 
 struct FileLine {
     std::string m_content; // the content of this line
-    int m_length;  // the length of this line
+    size_t m_length;  // the length of this line
 };
 
 struct SymbolInfo {
     std::string m_name;
     int m_kind;
     int m_lineno;
-    int m_length;
+    size_t m_length;
 };
 
 struct FileSymbol {

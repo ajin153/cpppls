@@ -41,7 +41,7 @@ DefinitionHandler::handle(const nlohmann::json &req_content)
     int col = req_content["params"]["position"]["character"];
     FileLine file_line = file_lines[row];
     std::string cur_line = file_line.m_content;
-    std::regex definition_regex("[a-zA-Z0-9:_]+");
+    std::regex definition_regex("[a-zA-Z0-9:_>-]+"); // use ">-" not "->"
     if (col >= file_line.m_length) return;
     int left = col, right = col + 1;
     while (left > 0) {
@@ -68,9 +68,18 @@ DefinitionHandler::handle(const nlohmann::json &req_content)
     size_t definition_len = definition_str.size();
 
     if ((pos = definition_str.find_last_of("::")) != std::string::npos) {
-        package_name = definition_str.substr(0, pos - 1);
-        function_name = definition_str.substr(pos + 1, definition_len - pos - 1);
+        size_t arrow_pos = 0;
+        if ((arrow_pos = definition_str.find("->")) != std::string::npos) {
+            // 跳转TEST::AJIN->test()类型的test()
+            package_name = definition_str.substr(0, arrow_pos);
+            function_name = definition_str.substr(arrow_pos + 2);
+        } else {
+            // 跳转TEST::AJIN::test()类型的test()
+            package_name = definition_str.substr(0, pos - 1);
+            function_name = definition_str.substr(pos + 1);
+        }
     } else {
+        // 跳转当前文件的test()
         package_name = file_symbol.m_package_name;
         function_name = definition_str;
     }
@@ -109,10 +118,12 @@ DefinitionHandler::handle(const nlohmann::json &req_content)
 
     send_message(response);
 
+#ifndef NDEBUG
     // -----debug-----
     fmt::print(debug_file, ">>> Sending server response:\n{}\n\n",
                resp_content.dump(4));
     debug_file.flush();
     // ---------------
+#endif
 
 }
