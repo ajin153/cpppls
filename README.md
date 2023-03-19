@@ -72,7 +72,7 @@ find_package(Boost 1.80 REQUIRED COMPONENTS filesystem system) # Set your boost 
 ```bash
 cmake --build . --config Release
 ```
-*Note: If there is nothing wrong, you will get the cpppls.exe or cpppls(bin). Congratulation! Just get it from the path: **build/Release/***
+*Note: If there is nothing wrong, you will get the cpppls.exe or cpppls(bin). Congratulation! Just get it from the path: **build/Release/*** or **build/**
 
 ##### 3.Compile the symbol_scanner (optional)
 *Note: If you want to enjoy the features of **Symbols in File** and **Go to definition**, symbol_scanner is necessary.*

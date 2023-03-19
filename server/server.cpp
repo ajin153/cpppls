@@ -33,7 +33,7 @@ void
 Server::run()
 {
 #ifndef NDEBUG
-    // -----debug-----
+// -----debug-----
 #ifdef _WIN32
     debug_file.open("C:/Users/29280/Desktop/ajpj/cpppls/server/out/cpppls.log",
                     std::ios_base::app);
@@ -41,7 +41,7 @@ Server::run()
     debug_file.open("/home/ajin/Desktop/ajpj/cpppls/server/out/cpppls.log",
                     std::ios_base::app);
 #endif
-    // ---------------
+// ---------------
 #endif
 
     char c;
