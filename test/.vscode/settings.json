@@ -1,7 +1,0 @@
-{
-    "cpppls.perl_exe": "perl",
-    "cpppls.perl_incs": [
-        "/home/ajin/Desktop/ajpj/cpppls/test/",
-        "/usr/share/perl5/"
-    ]
-}

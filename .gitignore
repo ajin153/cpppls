@@ -7,4 +7,6 @@
 /server/tools/symbol_scanner/symbol_scanner
 /server/tools/symbol_scanner/symbol_scanner.exe
 /server/tools/symbol_scanner/lex.yy.c
+/test/
+/uml/
 /.vscode/
