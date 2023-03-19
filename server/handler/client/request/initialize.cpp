@@ -1,4 +1,4 @@
-#include "initialize.h"
+﻿#include "initialize.h"
 
 void
 InitializeHandler::handle(const nlohmann::json &req_content)
@@ -58,9 +58,11 @@ InitializeHandler::handle(const nlohmann::json &req_content)
     // 3.send initialize response
     send_message(response);
 
+#ifndef NDEBUG
     // -----debug-----
     fmt::print(debug_file, ">>> Sending server response:\n{}\n\n",
                resp_content.dump(4));
     // ---------------
+#endif
 
 }

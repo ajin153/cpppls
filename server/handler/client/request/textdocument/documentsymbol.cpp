@@ -1,4 +1,4 @@
-#include <future>
+﻿#include <future>
 #include <regex>
 #include <string>
 
@@ -76,10 +76,12 @@ DocumentSymbolHandler::handle(const nlohmann::json &req_content)
 
     send_message(response);
 
+#ifndef NDEBUG
     // -----debug-----
     fmt::print(debug_file, ">>> Sending server response:\n{}\n\n",
                resp_content.dump(4));
     debug_file.flush();
     // ---------------
+#endif
 
 }

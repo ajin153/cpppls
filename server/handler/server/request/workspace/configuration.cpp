@@ -31,6 +31,7 @@
     ]
 }
 */
+
 void
 ConfigurationHandler::handle(const nlohmann::json& resp_content)
 {

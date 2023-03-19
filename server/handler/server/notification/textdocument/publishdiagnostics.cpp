@@ -134,10 +134,12 @@ PublishDiagnosticsHandler::handle(const nlohmann::json& req_content)
         make_message(publish_diagnostics_content);
     send_message(publish_diagnostics_notification);
 
+#ifndef NDEBUG
     // -----debug-----
     fmt::print(debug_file, ">>> Sending server notification:\n{}\n\n",
                publish_diagnostics_content.dump(4));
     debug_file.flush();
     // ---------------
+#endif
 
 }
