@@ -97,7 +97,7 @@ There are several params you need to configure for the use of the cpppls as foll
 | cpppls.symbol_scanner.enabled | Enable symbol scanner | true | false |
 | cpppls.symbol_scanner.path | Path to the symbol scanner | "d:/Users/tools/" or "/home/tools/" | "" |
 
-Because I am a neovimer, and I always use the coc.nvim plugin. So here I can give the example for how to configure it with neovim and coc.nvim plugin.
+*Note: Because I am a neovimer, and I always use the coc.nvim plugin. So here I can give the example for how to configure it with neovim and coc.nvim plugin.*
 
 ### Neovim
 
